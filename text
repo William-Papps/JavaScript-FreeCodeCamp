@@ -1,0 +1,72 @@
+BEGIN
+    READ standardMealQuantity
+    READ largeMealQuantity
+    READ isStaff
+
+    SET standardMealPrice = 7.50
+    SET largeMealPrice = 10.00
+
+    SET staffDiscount = 0.15
+    SET bulkOrderDiscount = 1
+
+    SET staffDiscountApplied = FALSE
+    SET bulkOrderDiscountApplied = FALSE
+
+    SET staffDiscountAmount = 0
+    SET bulkOrderDiscountAmount = 0
+
+    SET invalidQuantityError = "Error: not a valid quanity, ensure at least one meal - No decimals"
+
+    INVOKE CALCULATE(standardMealQuantity, largeMealQuantity, isStaff, staffDiscount, bulkOrderDiscount, invalidQuantityError, standardMealPrice, largeMealPrice)
+
+    FUNCTION calculate (standardMealQuantity, largeMealQuantity, isStaff)
+        SET totalQuantity = standardMealQuantity + largeMealQuantity
+
+        IF !standardMealQuantity.isInteger || !largeMealQuantity.isInteger THEN
+            RETURN invalidQuantityError
+        ENDIF
+        IF totalQuantity < 1 THEN
+            RETURN invalidQuantityError
+        ENDIF
+
+        SET originalCost = (standardMealQuantity * standardMealPrice) + (largeMealQuantity * largeMealPrice)
+
+        INVOKE applyDiscounts (originalCost, isStaff, totalQuantity) // This will call the function block below.    
+
+        OUTPUT "Original Cost: " + originalCost
+        IF staffDiscountApplied THEN
+            OUTPUT `Staff Discount Applied: Saved ${staffDiscountAmount} from ${originalCost}`
+        ELSE 
+            OUTPUT "No Staff Discount Applied"
+        ENDIF
+        IF bulkOrderDiscountApplied THEN
+            OUTPUT `Bulk Order Discount Applied: Saved ${bulkOrderDiscountAmount} from ${totalQuantity} meals`
+        ELSE 
+            OUTPUT "No Bulk Order Discount Applied"
+        ENDIF
+        OUTPUT "Final Cost: " + finalCost
+    END FUNCTION
+END
+
+FUNCTION applyDiscounts (originalCost, isStaff, totalQuantity)
+    IF isStaff THEN
+        SET discountedCost = originalCost - (originalCost * staffDiscount)
+        SET staffDiscountApplied = TRUE
+        SET staffDiscountAmount = originalCost * staffDiscount
+    ELSE
+        set discountedCost = originalCost
+        SET staffDiscountApplied = FALSE
+    ENDIF
+
+    IF totalQuantity >= 10 THEN
+        SET discountedCost = discountedCost - (bulkOrderDiscount * totalQuantity)
+        SET bulkOrderDiscountApplied = TRUE
+        SET bulkOrderDiscountAmount = bulkOrderDiscount * totalQuantity
+    ELSE
+        SET bulkOrderDiscountApplied = FALSE
+    ENDIF
+    
+    SET finalCost = discountedCost
+
+    RETURN finalCost, staffDiscountApplied, bulkOrderDiscountApplied, staffDiscountAmount, bulkOrderDiscountAmount
+END FUNCTION
