@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Checkout Page</title>
+</head>
+
+<body>
+        
+    <main>
+
+        <h1>Checkout</h1>
+        
+        <section>
+            <h2>Your Cart</h2>
+            <img 
+                src="https://cdn.freecodecamp.org/curriculum/labs/cube.jpg" 
+                alt="Unsolved Rubiks Cube with the layers slightly twisted"
+                />
+        </section>
+        
+        <section>
+            <h2>Payment Information</h2>
+            <form>
+                <fieldset>
+                    <label                          for="card-name"
+                    >
+                        Cardholder Name 
+                        <span                   aria-hidden="true">*</span>
+                    </label>
+                    <input 
+                        type="text" name="card-name" id="card-name"
+                        placeholder="e.g. William Papps"
+                        required
+                    ><br>
+                    <label
+                        for="card-number"
+                    >
+                        Card Number 
+                        <span aria-hidden="true">*</span>
+                    </label>
+                    <input
+                        aria-describedby="card-number-help"
+                        type="text"
+                        name="card-number"
+                        id="card-number"
+                        placeholder="1234 1234 1234 1234"
+                        required
+                    >
+                    <p 
+                        id="card-number-help"
+                    >
+                        Enter card details with this format 1234 1234 1234 1234
+                    </p>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
