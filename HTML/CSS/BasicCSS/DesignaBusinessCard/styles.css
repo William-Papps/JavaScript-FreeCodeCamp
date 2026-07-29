@@ -1,31 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+body {
+  background-color: rosybrown;
+  font-family: Arial, sans-serif;
+}
 
-<head>
-    <meta charset="utf-8">
-    <title>Business Card</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+.business-card {
+  width: 300px;
+  background-color: green;
+  padding: 20px;
+  margin-top: 100px;
+  text-align: center;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-<body>
-    <div class="business-card">
-        <img src="https://cdn.freecodecamp.org/curriculum/labs/flower.jpg" class="profile-image" alt="meaningful description">
-        <p class="full-name">full name</p>
-        <p class="designation">designation</p>
-        <p class="company">company</p>
-        <hr>
-        <p>emailaddress@gmail.com</p>
-        <p>02712341234</p>
-        <a class="portfolio-link" href="https://www.freecodecamp.org/learn/responsive-web-design-v9/lab-business-card/design-a-business-card" target="_blank">Portfolio</a>
-        <hr>
-        <div class="social-media">
-        <h2>Connect with me</h2>
-        <a href="https://www.freecodecamp.org/learn/responsive-web-design-v9/lab-business-card/design-a-business-card">Twitter</a>
-        <a href="https://www.freecodecamp.org/learn/responsive-web-design-v9/lab-business-card/design-a-business-card">LinkedIn</a>
-        <a href="https://www.freecodecamp.org/learn/responsive-web-design-v9/lab-business-card/design-a-business-card">GitHub</a>
-    </div>
-    </div>
-    
-</body>
+.profile-image {
+  max-width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-</html>
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+a {
+  text-decoration: none;
+}
